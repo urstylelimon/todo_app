@@ -20,9 +20,15 @@ while True:
         case 'show':
             file = open('files/todos.txt', 'r')
             todos = file.readlines()
-            file.close()
+            file.close( )
 
-            for index, item in enumerate(todos):
+            new_todos = []
+            for item in todos:
+                new_item = item.strip('\n')
+                new_todos.append(new_item)
+
+
+            for index, item in enumerate(new_todos):
                 items = item.title()
 
                 '''
