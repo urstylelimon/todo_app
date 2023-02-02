@@ -1,4 +1,2 @@
-Go to home
-Watch a movie
-Read a book
-Play cricket
+watch
+Play

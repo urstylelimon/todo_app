@@ -13,6 +13,8 @@ while True:
             c_todo = todo.capitalize()
             todos.append(c_todo)
 
+
+
             file = open('files/todos.txt', 'w')
             file.writelines(todos)
             file.close()
@@ -20,7 +22,7 @@ while True:
         case 'show':
             file = open('files/todos.txt', 'r')
             todos = file.readlines()
-            file.close( )
+            file.close()
 
             new_todos = []
             for item in todos:
@@ -41,13 +43,35 @@ while True:
                 print(output)
 
         case 'edit':
+
+            file = open('files/todos.txt','r')
+            todos = file.readlines()
+            file.close()
+
             todo_index = int(input("Enter the number : "))
             todo_index = todo_index - 1
-            todos[todo_index] = input("Enter your update todo : ")
+
+            edit_todo = input("Enter your update todo : ") + "\n"
+
+            todos[todo_index] = edit_todo
+
+            file = open('files/todos.txt','w')
+            file.writelines(todos)
+            file.close()
+
 
         case 'complete':
-            com_1 = int(input("Enter the todo name witch you complete : \n"))
-            com_2 = todos.pop(com_1 - 1)
+
+            file = open('files/todos.txt','r')
+            todos = file.readlines()
+            file.close()
+
+            com_1 = int(input("Enter the todo number witch you complete : \n"))
+            todos.pop(com_1 - 1)
+
+            file = open('files/todos.txt','w')
+            file.writelines(todos)
+            file.close()
 
         case 'exit':
             break
