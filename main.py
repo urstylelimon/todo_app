@@ -1,82 +1,89 @@
+from function import file_read,file_write
 while True:
-    user_prompt = input("What do you want ? type add or show or complete or edit or exit : \n")
+    user_prompt = input("What do you want ? type add or show or complete or edit or exit : ") + "\n"
     user_prompt = user_prompt.strip()
 
-    match user_prompt:
-        case 'add':
-            todo = input("Enter your todo : ") + "\n"
+    if user_prompt.startswith("add"):
+        todo = user_prompt[4:] + "\n"
+        todos = file_read()
 
-            file = open('files/todos.txt', 'r')
-            todos = file.readlines()
-            file.close()
+        c_todo = todo.capitalize()
+        todos.append(c_todo)
 
-            c_todo = todo.capitalize()
-            todos.append(c_todo)
+        file_write(todos)
 
-
-
-            file = open('files/todos.txt', 'w')
-            file.writelines(todos)
-            file.close()
-
-        case 'show':
-            file = open('files/todos.txt', 'r')
-            todos = file.readlines()
-            file.close()
-
-            new_todos = []
-            for item in todos:
-                new_item = item.strip('\n')
-                new_todos.append(new_item)
+        print("\n Sucessfully Added \n")
 
 
-            for index, item in enumerate(new_todos):
-                items = item.title()
+    if user_prompt.startswith("show"):
 
-                '''
-                This is another method
+        todos = file_read()
 
-                print(index + 1 ,'-', items) 
-                '''
+        new_todos = []
+        for item in todos:
+            new_item = item.strip('\n')
+            new_todos.append(new_item)
 
-                output = f"{index + 1} - {items}"
-                print(output)
-
-        case 'edit':
-
-            file = open('files/todos.txt','r')
-            todos = file.readlines()
-            file.close()
-
-            todo_index = int(input("Enter the number : "))
-            todo_index = todo_index - 1
-
-            edit_todo = input("Enter your update todo : ") + "\n"
-
-            todos[todo_index] = edit_todo
-
-            file = open('files/todos.txt','w')
-            file.writelines(todos)
-            file.close()
+        for index, item in enumerate(new_todos):
+            items = item.title()
+            output = f"{index + 1} - {items}"
+            print(output)
 
 
-        case 'complete':
+    if user_prompt.startswith("edit"):
 
-            file = open('files/todos.txt','r')
-            todos = file.readlines()
-            file.close()
+        todos = file_read()
 
-            com_1 = int(input("Enter the todo number witch you complete : \n"))
-            todos.pop(com_1 - 1)
+        new_todos = []
+        for item in todos:
+            new_item = item.strip('\n')
+            new_todos.append(new_item)
 
-            file = open('files/todos.txt','w')
-            file.writelines(todos)
-            file.close()
+        for index, item in enumerate(new_todos):
+            items = item.title()
+            output = f"{index + 1} - {items}"
+            print(output)
 
-        case 'exit':
-            break
+        todo_index = int(input("Enter the number : "))
+        todo_index = todo_index - 1
 
-        case whatever:
-            print("Please enter the right key.")
+        edit_todo = input("Enter your update todo : ") + "\n"
+
+        todos[todo_index] = edit_todo
+
+        file_write(todos)
+
+        print("\n Sucessfully Edited \n")
+
+
+    if user_prompt.startswith("complete"):
+
+        todos = file_read()
+
+        new_todos = []
+        for item in todos:
+            new_item = item.strip('\n')
+            new_todos.append(new_item)
+
+        for index, item in enumerate(new_todos):
+            items = item.title()
+            output = f"{index + 1} - {items}"
+            print(output)
+
+        com_1 = int(input("Enter the todo number witch you complete : \n"))
+        todos.pop(com_1 - 1)
+
+        file = open('files/todos.txt','w')
+        file.writelines(todos)
+        file.close()
+
+        print("\n Sucessfully removed \n")
+
+
+    if user_prompt.startswith("exit"):
+        break
+
+    else:
+        print("Command is not Valid")
 
 print('Thank you for using our app')
