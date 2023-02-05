@@ -1,5 +1,9 @@
+import time
 from function import file_read,file_write
+
 while True:
+
+    print(time.strftime(" \n Date : %b %d %y \n Time : %H hour %S second \n "))
     user_prompt = input("What do you want ? type add or show or complete or edit or exit : ") + "\n"
     user_prompt = user_prompt.strip()
 
@@ -84,6 +88,6 @@ while True:
         break
 
     else:
-        print("Command is not Valid")
+        print(" \n Command is not Valid \n")
 
 print('Thank you for using our app')
